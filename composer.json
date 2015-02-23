@@ -1,0 +1,21 @@
+{
+	"name": "phoenixcms/cms",
+	"description": "CMS for folks && programmers.",
+	"homepage": "http://blatny.org",
+	"type": "project",
+	"license": ["MIT"],
+	"authors": [
+		{
+			"name": "Tomáš Blatný",
+			"homepage": "http://blatny.org"
+		}
+	],
+	"require": {
+		"php": ">= 5.4.0",
+		"nette/nette": "v2.2.7",
+        "tharos/leanmapper": "v2.2.0"
+	},
+	"require-dev": {
+		"nette/tester": "v1.3.2"
+	}
+}
