@@ -1,4 +1,4 @@
 vendor/*
 !.gitignore
 .idea
-tests/temp/*
+tests/files/temp/*
