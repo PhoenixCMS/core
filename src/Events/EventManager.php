@@ -23,8 +23,8 @@ class EventManager
 	public function __construct(Container $container)
 	{
 		$this->container = $container;
-		$subscribers = $this->container->findByType('\\Phoenix\\Events\\IEventListener');
-		foreach ($subscribers as $class) {
+		$listeners = $this->container->findByType('\\Phoenix\\Events\\IEventListener');
+		foreach ($listeners as $class) {
 			$reflection = ClassType::from($container->getService($class));
 			foreach ($reflection->getMethods() as $method) {
 				if ($method->hasAnnotation(self::ANNOTATION_EVENT_LISTENER)) {
