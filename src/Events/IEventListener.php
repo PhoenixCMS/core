@@ -5,7 +5,7 @@
 
 namespace Phoenix\Events;
 
-interface IEventSubscriber
+interface IEventListener
 {
 
 }

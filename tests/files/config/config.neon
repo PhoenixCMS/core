@@ -1,0 +1,5 @@
+extensions:
+    - Phoenix\DI\Extensions\EventsExtension
+
+services:
+    - FooListener

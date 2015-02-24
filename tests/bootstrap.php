@@ -13,4 +13,11 @@ function id($val) {
 	return $val;
 }
 
-return [];
+$configurator = new Nette\Configurator;
+$configurator->setDebugMode(FALSE);
+$configurator->setTempDirectory(__DIR__ . '/files/temp');
+$configurator->createRobotLoader()
+	->addDirectory(__DIR__ . '/files/mock')
+	->register();
+$configurator->addConfig(__DIR__ . '/files/config/config.neon');
+return $configurator->createContainer();
