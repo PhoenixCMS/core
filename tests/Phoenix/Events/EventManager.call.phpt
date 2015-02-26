@@ -13,7 +13,7 @@ Assert::equal(2, count($container->findByType('\\Phoenix\\Events\\IEventListener
 
 $eventManager->call('onFoo', 1, 2, 3);
 
-Assert::equal(TRUE, $container->getByType('\\FooListener')->called);
+Assert::true($container->getByType('\\FooListener')->called);
 Assert::exception(function () use ($eventManager) {
     $eventManager->call('onFoo', 'a', 2, 3);
 }, new InvalidEventArgumentValueException);
