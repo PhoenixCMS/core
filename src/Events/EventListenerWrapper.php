@@ -47,7 +47,7 @@ class EventListenerWrapper
         }
         $count = count($parameters);
         for ($i = 0; $i < $count; $i++) {
-            $this->validateArgument($arguments[$i], $i);
+            $arguments[$i] = $this->validateArgument($arguments[$i], $i);
         }
         call_user_func_array([$this->service, $this->method->getName()], $arguments);
     }
@@ -129,10 +129,10 @@ class EventListenerWrapper
                 }
             default:
                 // string[], int[], stdClass[], etc
-                if (substr($annotation, -2) === '[]') {
+                if (substr($type, -2) === '[]') {
                     $argument = $this->convertToType($argument, 'array ' . $name);
                     foreach ($argument as $key => $value) {
-                        $argument[$key] = $this->convertToType($value, substr($annotation, 0, -2) . ' ' . $name);
+                        $argument[$key] = $this->convertToType($value, substr($type, 0, -2) . ' ' . $name);
                     }
                     return $argument;
                 }
