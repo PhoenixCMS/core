@@ -13,9 +13,25 @@ function id($val) {
 	return $val;
 }
 
+$tempDir = __DIR__ . '/files/temp';
+
+// clear cache dir
+if (is_dir($tempDir)) {
+	$ignored = ['.', '..'];
+	foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tempDir)) as $fileName => $fileInfo) {
+		if(!in_array($fileInfo->getFilename(), $ignored)) {
+			if(is_dir($fileName)) {
+				@rmdir($fileName);
+			} else {
+				@unlink($fileName);
+			}
+		}
+	}
+}
+
 $configurator = new Nette\Configurator;
 $configurator->setDebugMode(FALSE);
-$configurator->setTempDirectory(__DIR__ . '/files/temp');
+$configurator->setTempDirectory($tempDir);
 $configurator->createRobotLoader()
 	->addDirectory(__DIR__ . '/files/mock')
 	->register();
