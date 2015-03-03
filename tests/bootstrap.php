@@ -19,8 +19,8 @@ $tempDir = __DIR__ . '/files/temp';
 if (is_dir($tempDir)) {
 	$ignored = ['.', '..'];
 	foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tempDir)) as $fileName => $fileInfo) {
-		if(!in_array($fileInfo->getFilename(), $ignored)) {
-			if(is_dir($fileName)) {
+		if (!in_array($fileInfo->getFilename(), $ignored)) {
+			if (is_dir($fileName)) {
 				@rmdir($fileName);
 			} else {
 				@unlink($fileName);
