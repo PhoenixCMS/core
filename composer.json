@@ -1,6 +1,6 @@
 {
-	"name": "phoenixcms/cms",
-	"description": "CMS for folks && programmers.",
+	"name": "phoenixcms/core",
+	"description": "The core of PhoenixCMS",
 	"homepage": "http://blatny.org",
 	"type": "project",
 	"license": ["MIT"],
