@@ -85,6 +85,12 @@ class EventListenerWrapper
     {
         list($type, $name) = explode(' ', $annotation, 3);
         switch ($type) {
+            case 'null':
+                if (is_null($argument)) {
+                    return $argument;
+                } else {
+                    throw new InvalidEventArgumentValueException("Argument '$name' should be null, " . gettype($argument) . ' given.');
+                }
             case 'bool':
             case 'boolean':
                 return (bool) $argument;
@@ -111,6 +117,12 @@ class EventListenerWrapper
                 } else {
                     throw new InvalidEventArgumentValueException("Argument '$name' should be string, " . gettype($argument) . ' given.');
                 }
+            case 'scalar':
+                if (is_scalar($argument)) {
+                    return $argument;
+                } else {
+                    throw new InvalidEventArgumentValueException("Argument '$name' should be scalar, " . gettype($argument) . ' given.');
+                }
             case 'array':
                 if (is_array($argument)) {
                     return $argument;
@@ -126,6 +138,21 @@ class EventListenerWrapper
                     return (object) $argument;
                 } else {
                     throw new InvalidEventArgumentValueException("Argument '$name' should be object, " . gettype($argument) . ' given.');
+                }
+            case 'mixed':
+                return $argument;
+            case 'resource':
+                if (is_resource($argument)) {
+                    return $argument;
+                } else {
+                    throw new InvalidEventArgumentValueException("Argument '$name' should be resource, " . gettype($argument) . ' given.');
+                }
+            case 'callable':
+            case 'callback':
+                if (is_callable($argument)) {
+                    return $argument;
+                } else {
+                    throw new InvalidEventArgumentValueException("Argument '$name' should be callable, " . gettype($argument) . ' given.');
                 }
             default:
                 // string[], int[], stdClass[], etc

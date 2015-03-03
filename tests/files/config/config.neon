@@ -1,5 +1,7 @@
 extensions:
+    - Phoenix\DI\Extensions\DatabaseExtension
     - Phoenix\DI\Extensions\EventsExtension
+    - Phoenix\DI\Extensions\ModulesExtension
 
 services:
     - FooListener

@@ -9,15 +9,29 @@ use Tester\Assert;
 class VariableTypesListener implements IEventListener
 {
 
+    public $onNullCalled = FALSE;
     public $onBoolCalled = FALSE;
     public $onIntCalled = FALSE;
     public $onFloatCalled = FALSE;
     public $onStringCalled = FALSE;
+    public $onScalarCalled = FALSE;
     public $onArrayCalled = FALSE;
     public $onObjectCalled = FALSE;
+    public $onResourceCalled = FALSE;
+    public $onCallableCalled = FALSE;
     public $onAnnotationArrayCalled = FALSE;
     public $onTypehintCalled = FALSE;
     public $onDeepArrayCalled = FALSE;
+
+    /**
+     * @eventListener onNull
+     * @param  null $null
+     */
+    public function onNull($null)
+    {
+        Assert::type('null', $null);
+        $this->onNullCalled = TRUE;
+    }
 
     /**
      * @eventListener onBool
@@ -67,6 +81,17 @@ class VariableTypesListener implements IEventListener
         $this->onStringCalled = TRUE;
     }
 
+    /** @noinspection PhpUndefinedClassInspection (for IDE) */
+    /**
+     * @eventListener onScalar
+     * @param  scalar $scalar
+     */
+    public function onScalar($scalar)
+    {
+        Assert::type('scalar', $scalar);
+        $this->onScalarCalled = TRUE;
+    }
+
     /**
      * @eventListener onArray
      * @param  array $array
@@ -85,6 +110,26 @@ class VariableTypesListener implements IEventListener
     {
         Assert::type('object', $object);
         $this->onObjectCalled = TRUE;
+    }
+
+    /**
+     * @eventListener onResource
+     * @param  resource $resource
+     */
+    public function onResource($resource)
+    {
+        Assert::type('resource', $resource);
+        $this->onResourceCalled = TRUE;
+    }
+
+    /**
+     * @eventListener onCallable
+     * @param  callable $callable
+     */
+    public function onCallable($callable)
+    {
+        Assert::type('callable', $callable);
+        $this->onCallableCalled = TRUE;
     }
 
     /**

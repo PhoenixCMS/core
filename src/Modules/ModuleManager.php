@@ -10,7 +10,7 @@ use Phoenix\Events\EventManager;
 class ModuleManager
 {
 
-
+    /** @var IModule[] */
     private $modules = [];
 
     /** @var EventManager */
@@ -22,12 +22,23 @@ class ModuleManager
         $this->eventManager = $eventManager;
     }
 
-
-    public function addModule(Module $module)
+    /**
+     * @param IModule $module
+     * @return $this
+     */
+    public function addModule(IModule $module)
     {
         $this->modules[$name = $module->getName() . '/' . $module->getVendor()] = $module;
         $this->eventManager->call('phoenix.modules.init', $name, $module);
         return $this;
+    }
+
+    /**
+     * @return IModule[]
+     */
+    public function getModules()
+    {
+        return $this->modules;
     }
 
 
